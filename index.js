@@ -7,11 +7,15 @@ function closeMenu() {
 }
 
 async function renderBooks(filter) {
-
     const featuredBooksWrapper = document.querySelector("#featured-books");
     const popularBooksWrapper = document.querySelector("#popular-books");
 
     const books = await getBooks();
+
+    if (!Array.isArray(books)) {
+        console.error("Books data is not an array:", books);
+        return;
+    }
 
     // Separate the books into their two sections
     const featuredBooks = books.filter(book => book.featured);
